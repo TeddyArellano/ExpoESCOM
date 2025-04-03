@@ -19,7 +19,7 @@ export default function Hero() {
         padding: '2rem'
       }}
     >
-      <h1>EXPO-ESCOM   2025</h1>
+      <h1 className="hero-title">EXPO-ESCOM 2025</h1>
       <button className="btn">MÁS INFORMACIÓN</button>
       <p><strong>Talleres:</strong> 21 al 24 de octubre de 2025.</p>
       <p><strong>Ponencias:</strong> 27 al 30 de octubre de 2025.</p>

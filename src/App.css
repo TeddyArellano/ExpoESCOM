@@ -30,6 +30,12 @@ body {
   padding-top: 80px;
 }
 
+.hero-title {
+  font-size: 6rem;
+  font-weight: bold;
+}
+
+
 .section {
   padding: 100px 20px;
   text-align: center;
