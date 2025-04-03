@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #211a88;
+  padding: 1rem;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.hero {
+  padding-top: 80px;
+}
+
+.section {
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.footer {
+  background: #111;
+  color: #fff;
+  padding: 2rem;
+  text-align: center;
+}
