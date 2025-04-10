@@ -8,22 +8,39 @@ body {
   top: 0;
   width: 100%;
   background: #211a88;
-  padding: 1rem;
+  padding: 1rem 2rem;
   z-index: 1000;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.navbar ul {
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar-logo {
+  height: 40px;
+  object-fit: contain;
+}
+
+.navbar ul,
+.navbar-menu {
   display: flex;
   list-style: none;
   gap: 2rem;
+  margin: 0;
+  padding: 0;
 }
 
+.navbar-menu a,
 .navbar a {
   color: white;
   text-decoration: none;
   cursor: pointer;
+  font-weight: bold;
 }
 
 .hero {
@@ -31,10 +48,9 @@ body {
 }
 
 .hero-title {
-  font-size: 6rem;
+  font-size: 350%;
   font-weight: bold;
 }
-
 
 .section {
   padding: 100px 20px;
