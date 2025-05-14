@@ -1,70 +1,78 @@
-# Getting Started with Create React App
+# 🌐 ExpoESCOM
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**ExpoESCOM** es una plataforma web diseñada para facilitar la gestión de eventos académicos dentro de la ESCOM-IPN. Desarrollada como proyecto estudiantil, esta herramienta permite el registro de participantes, seguimiento de ponencias y generación de estadísticas visuales mediante interfaces modernas y responsivas.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Tecnologías utilizadas
 
-### `npm start`
+- ⚛️ React – Frontend interactivo y modular
+- 🟢 Node.js – Backend con Express
+- 🛢️ MySQL – Base de datos relacional para almacenamiento de registros
+- 📦 Git & GitHub – Control de versiones y colaboración
+- ✅ Kanban – Organización ágil del flujo de trabajo
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📸 Capturas de pantalla
 
-### `npm test`
+> *(Agrega aquí imágenes si las tienes, por ejemplo:)*
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+📌 ./assets/login.png
+📌 ./assets/dashboard.png
+```
 
-### `npm run build`
+```markdown
+![Login](./assets/login.png)
+![Dashboard](./assets/dashboard.png)
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🛠️ Instalación local
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **Clonar el repositorio**
+```bash
+git clone https://github.com/TeddyArellano/ExpoESCOM.git
+cd ExpoESCOM
+```
 
-### `npm run eject`
+2. **Instalar dependencias del frontend y backend**
+```bash
+# En la carpeta raíz
+cd client
+npm install
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+cd ../server
+npm install
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. **Configurar base de datos**
+- Crea una base de datos en MySQL llamada `expoescom`
+- Importa las tablas desde el archivo `/server/database/init.sql` (si lo tienes)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+4. **Iniciar el servidor y cliente**
+```bash
+# Terminal 1 - Backend
+cd server
+npm start
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+# Terminal 2 - Frontend
+cd client
+npm start
+```
 
-## Learn More
+La aplicación estará disponible en `http://localhost:3000`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 👤 Autor
 
-### Code Splitting
+- **Teddy Arellano** – [LinkedIn](https://www.linkedin.com/in/jarellanojr) | [GitHub](https://github.com/TeddyArellano)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## 📄 Licencia
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Este proyecto fue creado con fines educativos y no cuenta con una licencia comercial. Puede ser utilizado como referencia para proyectos similares.
