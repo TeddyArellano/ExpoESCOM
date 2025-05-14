@@ -7,16 +7,17 @@ import Talleres from './components/Talleres';
 import Ponencias from './components/Ponencias';
 import Footer from './components/Footer';
 
+
 function App() {
   return (
-    <div>
+    <>
       <Navbar />
       <Hero />
       <Registro />
       <Talleres />
       <Ponencias />
       <Footer />
-    </div>
+    </>
   );
 }
 
