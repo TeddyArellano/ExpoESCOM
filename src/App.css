@@ -68,3 +68,64 @@ body {
   padding: 2rem;
   text-align: center;
 }
+
+/* Estilos para el formulario de registro */
+.section form {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(33,26,136,0.10);
+  padding: 2rem 2rem 1.5rem 2rem;
+  margin-top: 2rem;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #211a88;
+}
+
+.section form input,
+.section form select {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 1.2rem;
+  border: 1px solid #bfc0c5;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #f7f8fa;
+  transition: border 0.2s;
+}
+
+.section form input:focus,
+.section form select:focus {
+  border: 1.5px solid #211a88;
+  outline: none;
+  background: #fff;
+}
+
+.section form button[type="submit"] {
+  background: #211a88;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.8rem 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.2s;
+}
+
+.section form button[type="submit"]:hover {
+  background: #18126b;
+}
+
+.section form p {
+  margin-top: 1rem;
+  font-size: 1rem;
+  text-align: center;
+}
