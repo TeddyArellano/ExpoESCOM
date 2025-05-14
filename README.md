@@ -65,11 +65,6 @@ npm start
 
 La aplicación estará disponible en `http://localhost:3000`
 
----
-
-## 👤 Autor
-
-- **Teddy Arellano** – [LinkedIn](https://www.linkedin.com/in/jarellanojr) | [GitHub](https://github.com/TeddyArellano)
 
 ---
 
