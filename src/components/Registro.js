@@ -10,7 +10,7 @@ export default function Registro() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!nombre || !tipo || (tipo === 'alumno' && !boleta)) {
-      setMensaje('Por favor, completa todos los campos requeridos.');
+      setMensaje('Por favor completa todos los campos requeridos.');
       return;
     }
     try {
