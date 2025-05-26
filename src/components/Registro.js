@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 export default function Registro() {
   const [tipoUsuario, setTipoUsuario] = useState('');
   const [boleta, setBoleta] = useState('');
+  const [numeroEmpleado, setNumeroEmpleado] = useState('');
   const [carrera, setCarrera] = useState('');
   const [nombre, setNombre] = useState('');
   const [correo, setCorreo] = useState('');
@@ -11,12 +12,20 @@ export default function Registro() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!tipoUsuario) return alert('Selecciona tipo de usuario');
+
     if (tipoUsuario === 'alumno') {
       if (!carrera) return alert('Selecciona la carrera');
       if (!/^\d{10}$/.test(boleta)) {
         return alert('La boleta debe tener 10 dígitos');
       }
     }
+
+    if (tipoUsuario === 'maestro') {
+      if (!/^\d{8,10}$/.test(numeroEmpleado)) {
+        return alert('El número de empleado debe tener entre 8 y 10 dígitos');
+      }
+    }
+
     if (!nombre.trim()) return alert('Ingresa tu nombre completo');
     if (!correo.match(/.+@.+\.ipn\.mx$/)) {
       return alert('Correo institucional debe terminar en .ipn.mx');
@@ -27,6 +36,7 @@ export default function Registro() {
 Tipo: ${tipoUsuario}
 Carrera: ${carrera || 'N/A'}
 Boleta: ${boleta || 'N/A'}
+Número de empleado: ${numeroEmpleado || 'N/A'}
 Nombre: ${nombre}
 Correo: ${correo}
 Proyecto: ${proyecto}`);
@@ -43,7 +53,9 @@ Proyecto: ${proyecto}`);
               value={tipoUsuario}
               onChange={(e) => {
                 setTipoUsuario(e.target.value);
-                if (e.target.value !== 'alumno') {
+                if (e.target.value === 'alumno') {
+                  setNumeroEmpleado('');
+                } else {
                   setBoleta('');
                   setCarrera('');
                 }
@@ -88,6 +100,22 @@ Proyecto: ${proyecto}`);
                 />
               </label>
             </>
+          )}
+
+          {tipoUsuario === 'maestro' && (
+            <label style={styles.label}>
+              Número de empleado
+              <input
+                type="text"
+                value={numeroEmpleado}
+                onChange={(e) => setNumeroEmpleado(e.target.value)}
+                placeholder="Ejemplo: 12345678"
+                pattern="\d{8,10}"
+                title="Entre 8 y 10 dígitos"
+                required
+                style={styles.input}
+              />
+            </label>
           )}
 
           <label style={styles.label}>
