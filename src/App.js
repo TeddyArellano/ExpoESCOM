@@ -6,6 +6,7 @@ import Registro from './components/Registro'
 import Talleres from './components/Talleres';
 import Ponencias from './components/Ponencias';
 import Footer from './components/Footer';
+import Infromacion from './components/Informacion';
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
     <>
       <Navbar />
       <Hero />
+      <Infromacion/>
       <Registro />
       <Talleres />
       <Ponencias />
