@@ -4,14 +4,14 @@ import logoESCOM from '../assets/ESCOMBLANCO.png';
 import logoIPN from '../assets/IPNBLANCO.png';
 
 export default function Navbar() {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 850);
   const [menuOpen, setMenuOpen] = useState(false);
 
   // Detecta cambio de tamaño de pantalla
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-      if (window.innerWidth > 768) setMenuOpen(false); // cierra menú si pasas a escritorio
+      setIsMobile(window.innerWidth <= 850);
+      if (window.innerWidth > 850) setMenuOpen(false); // cierra menú si pasas a escritorio
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
