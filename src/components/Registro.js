@@ -27,7 +27,7 @@ export default function Registro() {
     }
   }, [formVisible, tipoUsuario]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!tipoUsuario) return alert('Selecciona tipo de usuario');
     if (tipoUsuario === 'alumno') {
@@ -41,14 +41,30 @@ export default function Registro() {
     if (!correo.match(/.+@.+\.ipn\.mx$/)) return alert('Correo institucional debe terminar en .ipn.mx');
     if (!proyecto.trim()) return alert('Ingresa nombre del proyecto');
 
-    alert(`¡Registro exitoso!
-Tipo: ${tipoUsuario}
-Carrera: ${carrera || 'N/A'}
-Boleta: ${boleta || 'N/A'}
-Número de empleado: ${numeroEmpleado || 'N/A'}
-Nombre: ${nombre}
-Correo: ${correo}
-Proyecto: ${proyecto}`);
+    // Enviar datos al backend
+    try {
+      const res = await fetch('http://localhost:3001/api/registro', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          tipo_usuario: tipoUsuario,
+          carrera,
+          boleta,
+          nombre,
+          correo,
+          proyecto
+        }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        alert('¡Registro exitoso!');
+        // Limpia los campos si quieres
+      } else {
+        alert(data.mensaje || 'Error al registrar');
+      }
+    } catch (err) {
+      alert('Error de conexión con el servidor');
+    }
   };
 
   return (

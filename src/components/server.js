@@ -14,13 +14,28 @@ const db = mysql.createConnection({
 });
 
 app.post('/api/registro', (req, res) => {
-  const { nombre, tipo, boleta } = req.body;
-  if (!nombre || !tipo || (tipo === 'alumno' && !bolenpta)) {
+  const { tipo_usuario, carrera, boleta, numero_empleado, nombre, correo, proyecto } = req.body;
+  if (
+    !tipo_usuario ||
+    !nombre ||
+    !correo ||
+    !proyecto ||
+    (tipo_usuario === 'alumno' && (!boleta || !carrera)) ||
+    (tipo_usuario === 'maestro' && !numero_empleado)
+  ) {
     return res.status(400).json({ mensaje: 'Faltan campos requeridos' });
   }
   db.query(
-    'INSERT INTO registros (nombre, tipo, boleta) VALUES (?, ?, ?)',
-    [nombre, tipo, tipo === 'alumno' ? boleta : null],
+    'INSERT INTO registros (tipo_usuario, carrera, boleta, numero_empleado, nombre, correo, proyecto) VALUES (?, ?, ?, ?, ?, ?, ?)',
+    [
+      tipo_usuario,
+      tipo_usuario === 'alumno' ? carrera : null,
+      tipo_usuario === 'alumno' ? boleta : null,
+      tipo_usuario === 'maestro' ? numero_empleado : null,
+      nombre,
+      correo,
+      proyecto
+    ],
     (err, result) => {
       if (err) return res.status(500).json({ mensaje: 'Error en la base de datos' });
       res.json({ mensaje: '¡Registro guardado correctamente!' });
