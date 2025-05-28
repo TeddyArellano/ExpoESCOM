@@ -9,7 +9,7 @@ export default function Informacion() {
       <strong><p>Llena el formulario</p></strong>
       <br></br>
       <p>Si deseas la generación de cartel, dirigete a esa sección en la barra de navegación e</p>
-      <strong><p>ingresa con tu correo institucional y numero de empleado o numero de boleta </p></strong>
+      <strong><p>ingresa con tu correo institucional y número de empleado o número de boleta </p></strong>
     </section>
   );
 }
