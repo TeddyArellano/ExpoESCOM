@@ -56,7 +56,7 @@ export default function Cartel() {
   };
 
   return (
-    <div className="cartel-page">
+    <div className="cartel-page" id="cartel">
       <div className="form-container">
         <h1>Generación de Cartel</h1>
         <form onSubmit={handleProjectSearch}>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-scroll';
+import { Link as RouterLink } from 'react-router-dom';
+import { Link as ScrollLink } from 'react-scroll';
 import logoESCOM from '../assets/ESCOMBLANCO.png';
 import logoIPN from '../assets/IPNBLANCO.png';
 
@@ -33,23 +34,21 @@ export default function Navbar() {
           <div style={styles.hamburger} onClick={() => setMenuOpen(!menuOpen)}>
             ☰
           </div>
-          {menuOpen && (
-            <ul style={styles.menuMobile}>
-              <li><Link to="cartel" smooth duration={500} style={styles.link} onClick={() => setMenuOpen(false)}>INFORMACIÓN</Link></li>
-              <li><Link to="registro" smooth duration={500} style={styles.link} onClick={() => setMenuOpen(false)}>REGISTRO</Link></li>
-              <li><Link to="talleres" smooth duration={500} style={styles.link} onClick={() => setMenuOpen(false)}>TALLERES</Link></li>
-              <li><Link to="ponencias" smooth duration={500} style={styles.link} onClick={() => setMenuOpen(false)}>PONENCIAS</Link></li>
-              <li><Link to="footer" smooth duration={500} style={styles.link} onClick={() => setMenuOpen(false)}>CONTACTO</Link></li>
+          {menuOpen && (            <ul style={styles.menuMobile}>
+              <li><RouterLink to="/cartel" style={styles.link} onClick={() => setMenuOpen(false)}>CARTEL</RouterLink></li>
+              <li><ScrollLink to="registro" spy={true} smooth={true} offset={-80} duration={500} style={styles.link} onClick={() => setMenuOpen(false)}>REGISTRO</ScrollLink></li>
+              <li><ScrollLink to="talleres" spy={true} smooth={true} offset={-80} duration={500} style={styles.link} onClick={() => setMenuOpen(false)}>TALLERES</ScrollLink></li>
+              <li><ScrollLink to="ponencias" spy={true} smooth={true} offset={-80} duration={500} style={styles.link} onClick={() => setMenuOpen(false)}>PONENCIAS</ScrollLink></li>
+              <li><ScrollLink to="footer" spy={true} smooth={true} offset={-80} duration={500} style={styles.link} onClick={() => setMenuOpen(false)}>CONTACTO</ScrollLink></li>
             </ul>
           )}
         </>
-      ) : (
-        <ul style={styles.menu}>
-           <li><Link to="cartel" smooth duration={500} style={styles.link}>CARTEL</Link></li>
-          <li><Link to="registro" smooth duration={500} style={styles.link}>REGISTRO</Link></li>
-          <li><Link to="talleres" smooth duration={500} style={styles.link}>TALLERES</Link></li>
-          <li><Link to="ponencias" smooth duration={500} style={styles.link}>PONENCIAS</Link></li>
-          <li><Link to="footer" smooth duration={500} style={styles.link}>CONTACTO</Link></li>
+      ) : (        <ul style={styles.menu}>
+          <li><RouterLink to="/cartel" style={styles.link}>CARTEL</RouterLink></li>
+          <li><ScrollLink to="registro" spy={true} smooth={true} offset={-80} duration={500} style={styles.link}>REGISTRO</ScrollLink></li>
+          <li><ScrollLink to="talleres" spy={true} smooth={true} offset={-80} duration={500} style={styles.link}>TALLERES</ScrollLink></li>
+          <li><ScrollLink to="ponencias" spy={true} smooth={true} offset={-80} duration={500} style={styles.link}>PONENCIAS</ScrollLink></li>
+          <li><ScrollLink to="footer" spy={true} smooth={true} offset={-80} duration={500} style={styles.link}>CONTACTO</ScrollLink></li>
         </ul>
       )}
     </nav>
