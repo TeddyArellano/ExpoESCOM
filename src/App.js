@@ -7,6 +7,7 @@ import Registro from './components/Registro';
 import Talleres from './components/Talleres';
 import Ponencias from './components/Ponencias';
 import Footer from './components/Footer';
+import Informacion from './components/Informacion';
 import Cartel from './components/Cartel';
 
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={
             <>
               <Hero />
+              <Informacion id="informacion"/>
               <Registro id="registro" />
               <Talleres id="talleres" />
               <Ponencias id="ponencias" />

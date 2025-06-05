@@ -8,7 +8,7 @@ export default function Informacion() {
       <p>En el apartado de Registro, puedes realizar tu inscripción de Proyecto a la EXPO - ESCOM 2025</p>
       <strong><p>Llena el formulario</p></strong>
       <br></br>
-      <p>Si deseas la generación de cartel, dirigete a esa sección en la barra de navegación e</p>
+      <p>Si deseas la generación de cartel, dirigete a esa sección (CARTEL) en la barra de navegación e</p>
       <strong><p>ingresa con tu correo institucional y número de empleado o número de boleta </p></strong>
     </section>
   );
