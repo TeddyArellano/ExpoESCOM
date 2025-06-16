@@ -9,6 +9,7 @@ export default function Registro() {
   const [correo, setCorreo] = useState('');
   const [proyecto, setProyecto] = useState('');
   const [formVisible, setFormVisible] = useState(false);
+  const [hover, setHover] = useState(false);
 
   const formRef = useRef(null);
   const [maxHeight, setMaxHeight] = useState('0px');
@@ -67,6 +68,33 @@ export default function Registro() {
     }
   };
 
+  const ArrowIcon = ({ open, bounce }) => (
+    <svg
+      style={{
+        transition: 'transform 0.3s ease',
+        transform: open ? 'rotate(90deg)' : 'rotate(0deg)',
+        width: '1.4em',
+        height: '1.4em',
+        fill: 'white',
+        display: 'inline-block',
+        verticalAlign: 'middle',
+        marginLeft: '8px',
+        animation: bounce ? 'bounce 0.6s ease infinite' : 'none',
+      }}
+      viewBox="0 0 20 20"
+    >
+      <path d="M7 5l5 5-5 5V5z" />
+      <style>
+        {`
+          @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+          }
+        `}
+      </style>
+    </svg>
+  );
+
   return (
     <section id="registro" className="section">
       <div style={styles.container}>
@@ -75,12 +103,13 @@ export default function Registro() {
           onClick={() => setFormVisible(!formVisible)}
           aria-expanded={formVisible}
           aria-controls="form-registro"
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+          title="Haz clic para desplegar/ocultar el formulario"
         >
           <span style={styles.titleText}>
             Formulario de Registro
-            <span style={{ ...styles.arrow, marginLeft: '6px' }}>
-            
-            </span>
+            <ArrowIcon open={formVisible} bounce={hover && !formVisible} />
           </span>
         </h3>
 
@@ -95,6 +124,7 @@ export default function Registro() {
           id="form-registro"
         >
           <form onSubmit={handleSubmit} style={styles.form}>
+            {/* El resto del formulario igual */}
             <label style={styles.label}>
               Tipo de usuario
               <select
@@ -232,15 +262,14 @@ const styles = {
     fontFamily: 'Segoe UI, sans-serif',
     cursor: 'pointer',
     userSelect: 'none',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   titleText: {
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%',
-  },
-  arrow: {
-    fontSize: '1.3rem',
   },
   formWrapper: {
     overflow: 'hidden',
