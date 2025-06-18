@@ -37,7 +37,7 @@ export default function Navbar() {
             <ul style={styles.menuMobile}>
               <li><Link to="cartel" smooth duration={500} style={styles.link} onClick={() => setMenuOpen(false)}>INFORMACIÓN</Link></li>
               <li><Link to="registro" smooth duration={500} style={styles.link} onClick={() => setMenuOpen(false)}>REGISTRO</Link></li>
-              <li><Link to="talleres" smooth duration={500} style={styles.link} onClick={() => setMenuOpen(false)}>TALLERES</Link></li>
+              <li><Link to="asistencia" smooth duration={500} style={styles.link} onClick={() => setMenuOpen(false)}>ASISTENCIA</Link></li>
               <li><Link to="ponencias" smooth duration={500} style={styles.link} onClick={() => setMenuOpen(false)}>PONENCIAS</Link></li>
               <li><Link to="footer" smooth duration={500} style={styles.link} onClick={() => setMenuOpen(false)}>CONTACTO</Link></li>
             </ul>
@@ -47,7 +47,7 @@ export default function Navbar() {
         <ul style={styles.menu}>
            <li><Link to="cartel" smooth duration={500} style={styles.link}>CARTEL</Link></li>
           <li><Link to="registro" smooth duration={500} style={styles.link}>REGISTRO</Link></li>
-          <li><Link to="talleres" smooth duration={500} style={styles.link}>TALLERES</Link></li>
+          <li><Link to="asistencia" smooth duration={500} style={styles.link}>ASISTENCIA</Link></li>
           <li><Link to="ponencias" smooth duration={500} style={styles.link}>PONENCIAS</Link></li>
           <li><Link to="footer" smooth duration={500} style={styles.link}>CONTACTO</Link></li>
         </ul>

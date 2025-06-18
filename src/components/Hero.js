@@ -20,8 +20,7 @@ export default function Hero() {
       }}
     >
       <h1 className="hero-title">EXPO-ESCOM 2025</h1>
-      <p><strong>Talleres: 21 al 24 de octubre de 2025.</strong></p>
-      <p><strong>Ponencias:27 al 30 de octubre de 2025.</strong></p>
+      <p><strong>FECHAS: 19 y 20 de Junio</strong></p>
     </div>
   );
 }
