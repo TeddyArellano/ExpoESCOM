@@ -75,15 +75,24 @@ export default function Cartel() {
     };
   }, [navigate]);
 
-  const handleProjectSearch = (e) => {
+  const handleProjectSearch = async (e) => {
     e.preventDefault();
-    // TODO: Implement database connection and search using both email and boleta
-    console.log('Searching for project with email:', email, 'and boleta:', boleta);
-    
-    // Aquí se haría la validación con la base de datos
-    if (email && boleta) {
-      setProjectName('Proyecto de Ejemplo'); // This would come from the DB
+    try {
+      const res = await fetch(
+        `http://localhost:3001/api/proyecto?correo=${encodeURIComponent(email)}&boleta=${encodeURIComponent(boleta)}`
+      );
+      if (!res.ok) {
+        alert('Proyecto no encontrado');
+        setIsProjectFound(false);
+        return;
+      }
+      const data = await res.json();
+      setProjectName(data.nombre_proyecto || '');
+      setDescription(''); // Puedes usar data.descripcion si lo tienes en la BD
       setIsProjectFound(true);
+    } catch (error) {
+      alert('Error al buscar el proyecto');
+      setIsProjectFound(false);
     }
   };
 

@@ -83,4 +83,28 @@ app.get('/api/proyecto', (req, res) => {
   );
 });
 
+// Guardar asistencia
+app.post('/api/asistencia', (req, res) => {
+  const { nombre, grupo, materia } = req.body;
+  if (!nombre || !grupo || !materia) {
+    return res.status(400).json({ mensaje: 'Faltan campos requeridos' });
+  }
+  db.query(
+    'INSERT INTO asistencia (nombre, grupo, materia) VALUES (?, ?, ?)',
+    [nombre, grupo, materia],
+    (err, result) => {
+      if (err) return res.status(500).json({ mensaje: 'Error en la base de datos' });
+      res.json({ mensaje: '¡Asistencia guardada correctamente!' });
+    }
+  );
+});
+
+// Consultar todas las asistencias
+app.get('/api/asistencia', (req, res) => {
+  db.query('SELECT * FROM asistencia', (err, results) => {
+    if (err) return res.status(500).json({ mensaje: 'Error en la base de datos' });
+    res.json(results);
+  });
+});
+
 app.listen(3001, () => console.log('Servidor backend en http://localhost:3001'));

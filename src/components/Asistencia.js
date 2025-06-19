@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Asistencia.css';
 
 export default function Asistencia() {
@@ -8,12 +8,35 @@ export default function Asistencia() {
   const [asistentes, setAsistentes] = useState([]);
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
 
-  const agregarAsistente = () => {
+  useEffect(() => {
+    // Consultar la asistencia al cargar el componente
+    fetch('http://localhost:3001/api/asistencia')
+      .then(res => res.json())
+      .then(data => setAsistentes(data))
+      .catch(() => setAsistentes([]));
+  }, []);
+
+  const agregarAsistente = async () => {
     if (nombre.trim() && grupo.trim() && materia.trim()) {
-      setAsistentes([...asistentes, { nombre, grupo, materia }]);
-      setNombre('');
-      setGrupo('');
-      setMateria('');
+      // Guardar en la base de datos
+      try {
+        const res = await fetch('http://localhost:3001/api/asistencia', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nombre, grupo, materia }),
+        });
+        const data = await res.json();
+        if (res.ok) {
+          setAsistentes([...asistentes, { nombre, grupo, materia }]);
+          setNombre('');
+          setGrupo('');
+          setMateria('');
+        } else {
+          alert(data.mensaje || 'Error al guardar la asistencia');
+        }
+      } catch (error) {
+        alert('Error de conexión con el servidor');
+      }
     }
   };
 
