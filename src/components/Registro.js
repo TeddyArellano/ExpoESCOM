@@ -5,6 +5,7 @@ export default function RegistroAlumnos() {
   const [nombreProyecto, setNombreProyecto] = useState('');
   const [materia, setMateria] = useState('');
   const [docente, setDocente] = useState('');
+  const [correoInstitucional, setCorreoInstitucional] = useState(''); // <- NUEVO
   const [horario, setHorario] = useState('');
   const [numIntegrantes, setNumIntegrantes] = useState(1);
   const [nombresIntegrantes, setNombresIntegrantes] = useState(['']);
@@ -30,6 +31,7 @@ export default function RegistroAlumnos() {
       nombreProyecto,
       materia,
       docente,
+      correoInstitucional,
       horario,
       integrantes: nombresIntegrantes,
     });
@@ -37,6 +39,7 @@ export default function RegistroAlumnos() {
     setNombreProyecto('');
     setMateria('');
     setDocente('');
+    setCorreoInstitucional('');
     setHorario('');
     setNumIntegrantes(1);
     setNombresIntegrantes(['']);
@@ -72,6 +75,7 @@ export default function RegistroAlumnos() {
             padding: '1.5rem',
           }}
         >
+          {/* Campo: Nombre del proyecto */}
           <div style={{ marginBottom: '1rem' }}>
             <label style={{ color: 'white' }}>Nombre del proyecto:</label><br />
             <input
@@ -84,6 +88,7 @@ export default function RegistroAlumnos() {
             />
           </div>
 
+          {/* Campo: Materia */}
           <div style={{ marginBottom: '1rem' }}>
             <label style={{ color: 'white' }}>Materia:</label><br />
             <input
@@ -96,6 +101,7 @@ export default function RegistroAlumnos() {
             />
           </div>
 
+          {/* Campo: Docente */}
           <div style={{ marginBottom: '1rem' }}>
             <label style={{ color: 'white' }}>Nombre del docente:</label><br />
             <input
@@ -108,6 +114,20 @@ export default function RegistroAlumnos() {
             />
           </div>
 
+          {/* Campo: Correo institucional (nuevo) */}
+          <div style={{ marginBottom: '1rem' }}>
+            <label style={{ color: 'white' }}>Correo institucional:</label><br />
+            <input
+              type="email"
+              value={correoInstitucional}
+              onChange={(e) => setCorreoInstitucional(e.target.value)}
+              required
+              placeholder="Ej. alumno@alumno.ipn.mx"
+              style={inputStyle}
+            />
+          </div>
+
+          {/* Campo: Horario */}
           <div style={{ marginBottom: '1rem' }}>
             <label style={{ color: 'white' }}>Horario:</label><br />
             <select
@@ -122,6 +142,7 @@ export default function RegistroAlumnos() {
             </select>
           </div>
 
+          {/* Campo: Número de integrantes */}
           <div style={{ marginBottom: '1rem' }}>
             <label style={{ color: 'white' }}>Número de integrantes (máximo 5):</label><br />
             <input
@@ -135,6 +156,7 @@ export default function RegistroAlumnos() {
             />
           </div>
 
+          {/* Campos dinámicos para nombres de integrantes */}
           {nombresIntegrantes.map((nombre, i) => (
             <div key={i} style={{ marginBottom: '1rem' }}>
               <label style={{ color: 'white' }}>Nombre del integrante #{i + 1}:</label><br />
@@ -149,6 +171,7 @@ export default function RegistroAlumnos() {
             </div>
           ))}
 
+          {/* Botón de envío */}
           <button
             type="submit"
             style={{
