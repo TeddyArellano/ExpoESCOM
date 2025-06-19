@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { generateCartel } from '../services/cartelService';
+import { useNavigate } from 'react-router-dom';
 import './Cartel.css';
 
 export default function Cartel() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [boleta, setBoleta] = useState('');
   const [projectName, setProjectName] = useState('');
@@ -10,6 +12,68 @@ export default function Cartel() {
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [isProjectFound, setIsProjectFound] = useState(false);
+  
+  // Función para manejar la navegación a la página principal y desplazarse a una sección
+  const handleNavigation = (section) => {
+    navigate('/');
+    // Usamos setTimeout para asegurar que la navegación ocurra primero
+    setTimeout(() => {
+      const element = document.getElementById(section);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
+  
+  // Eventos para interceptar los clics en los enlaces del Navbar
+  useEffect(() => {
+    const handleNavLinkClick = (e) => {
+      // Obtener todos los enlaces del Navbar
+      const navLinks = document.querySelectorAll('.nav-link');
+      
+      // Agregar listener a cada enlace
+      navLinks.forEach(link => {
+        if (link.textContent === 'REGISTRO') {
+          link.addEventListener('click', (e) => {
+            // Solo para enlaces de ScrollLink, no RouterLink
+            if (!link.getAttribute('href') || !link.getAttribute('href').startsWith('/')) {
+              e.preventDefault();
+              handleNavigation('registro');
+            }
+          });
+        } else if (link.textContent === 'ASISTENCIA') {
+          link.addEventListener('click', (e) => {
+            if (!link.getAttribute('href') || !link.getAttribute('href').startsWith('/')) {
+              e.preventDefault();
+              handleNavigation('asistencia');
+            }
+          });
+        } else if (link.textContent === 'PROYECTOS' || link.textContent === 'PONENCIAS') {
+          link.addEventListener('click', (e) => {
+            if (!link.getAttribute('href') || !link.getAttribute('href').startsWith('/')) {
+              e.preventDefault();
+              handleNavigation('ponencias');
+            }
+          });
+        } else if (link.textContent === 'CONTACTO') {
+          link.addEventListener('click', (e) => {
+            if (!link.getAttribute('href') || !link.getAttribute('href').startsWith('/')) {
+              e.preventDefault();
+              handleNavigation('footer');
+            }
+          });
+        }
+      });
+    };
+    
+    // Ejecutamos esta función después de que el componente se monte
+    setTimeout(handleNavLinkClick, 500);
+    
+    // Limpieza al desmontar el componente
+    return () => {
+      // La limpieza no es necesaria ya que los event listeners se eliminarán cuando se desmonte el componente
+    };
+  }, [navigate]);
 
   const handleProjectSearch = (e) => {
     e.preventDefault();
@@ -54,9 +118,15 @@ export default function Cartel() {
       alert('Error al generar el cartel. Por favor intente de nuevo.');
     }
   };
-
   return (
     <div className="cartel-page" id="cartel">
+      <div className="navigation-buttons">
+        <button onClick={() => navigate('/')} className="nav-button">Inicio</button>
+        <button onClick={() => handleNavigation('registro')} className="nav-button">Registro</button>
+        <button onClick={() => handleNavigation('ponencias')} className="nav-button">Proyectos</button>
+        <button onClick={() => handleNavigation('footer')} className="nav-button">Contacto</button>
+      </div>
+      
       <div className="form-container">
         <h1>Generación de Cartel</h1>
         <form onSubmit={handleProjectSearch}>

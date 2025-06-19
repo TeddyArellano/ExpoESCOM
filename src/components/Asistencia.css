@@ -1,0 +1,139 @@
+.asistencia-section {
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.asistencia-title {
+  font-size: 2.2rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.asistencia-description {
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+}
+
+.toggle-form-btn {
+  display: inline-block;
+  padding: 0.8rem 1.8rem;
+  background-color: #3366cc;
+  color: white;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  transition: background-color 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem; /* Increased font size */
+}
+
+.toggle-form-btn:hover {
+  background-color: #254e9c;
+}
+
+.asistencia-form {
+  background-color: rgba(26, 59, 92, 0.7);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-top: 1rem;
+}
+
+.asistencia-form h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.asistencia-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.asistencia-input {
+  padding: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  flex: 1;
+  min-width: 150px;
+}
+
+.asistencia-add-btn {
+  padding: 0.7rem 1.5rem;
+  cursor: pointer;
+  background-color: #3366cc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.asistencia-add-btn:hover {
+  background-color: #254e9c;
+}
+
+.asistencia-table {
+  margin-top: 1.5rem;
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.asistencia-table th {
+  background-color: #3366cc;
+  color: white;
+  padding: 0.8rem;
+  font-weight: 500;
+}
+
+.asistencia-table td {
+  padding: 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.asistencia-table tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.asistencia-export-btn {
+  margin-top: 1.5rem;
+  padding: 0.7rem 1.5rem;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  display: block;
+}
+
+.asistencia-export-btn:hover {
+  background-color: #3e8e41;
+}
+
+.no-data-message {
+  margin-top: 1rem;
+  font-style: italic;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .asistencia-inputs {
+    flex-direction: column;
+  }
+  
+  .asistencia-input {
+    width: 100%;
+  }
+}

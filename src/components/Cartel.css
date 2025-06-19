@@ -1,11 +1,40 @@
 .cartel-page {
   padding: 6rem 2rem 2rem 2rem;  /* Aumentamos el padding superior para el navbar */
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background-color: #f5f5f5;
   scroll-margin-top: 80px;  /* Esto ayuda a ajustar el punto de scroll */
+}
+
+/* Estilos para los botones de navegación */
+.navigation-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 700px;
+  flex-wrap: wrap;
+}
+
+.nav-button {
+  background-color: #003366;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.nav-button:hover {
+  background-color: #004488;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .cartel-page h1 {

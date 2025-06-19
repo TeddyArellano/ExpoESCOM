@@ -1,0 +1,64 @@
+.navbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 2rem;
+  background: linear-gradient(to bottom, #003366 0%, #005a8c 100%);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  font-family: 'Segoe UI', sans-serif;
+  box-sizing: border-box;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo {
+  height: 48px;
+  object-fit: contain;
+}
+
+.hamburger {
+  font-size: 1.8rem;
+  color: #ffffff;
+  cursor: pointer;
+  user-select: none;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 2rem;
+}
+
+.menu-mobile {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin-top: 1rem;
+  gap: 1rem;
+  width: 100%;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  cursor: pointer;
+}
+
+.menu li, .menu-mobile li {
+  font-family: 'Segoe UI', sans-serif;
+}

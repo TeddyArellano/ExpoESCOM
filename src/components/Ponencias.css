@@ -1,0 +1,228 @@
+.ponencias-section {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.ponencias-title {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #ffffff;
+  font-weight: 700;
+  text-align: center;
+  position: relative;
+}
+
+.ponencias-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background-color: #3366cc;
+  border-radius: 2px;
+}
+
+.ponencias-description {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  text-align: center;
+  color: #ffffff;
+  line-height: 1.6;
+}
+/* Timeline container */
+.ponencia-timeline {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Vertical timeline line */
+.ponencia-timeline::before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  background-color: #ffffff;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+/* Timeline item container */
+.ponencia-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5rem;
+  position: relative;
+}
+
+.ponencia-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Timeline center dot */
+.timeline-dot {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #3366cc;
+  border-radius: 50%;
+  left: 50%;
+  top: 30px;
+  transform: translateX(-50%);
+  z-index: 2;
+  box-shadow: 0 0 0 4px rgba(51, 102, 204, 0.3);
+}
+/* Left and right sides of timeline */
+.timeline-left, .timeline-right {
+  width: 45%;
+  position: relative;
+}
+
+/* Content box styling */
+.ponencia-content {
+  background-color: rgba(26, 59, 92, 0.7);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-left: 4px solid #3366cc;
+}
+
+.ponencia-title-item {
+  font-size: 1.4rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.ponencia-speaker {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.ponencia-description-item {
+  color: #ffffff;
+  line-height: 1.6;
+}
+
+/* Date and image styling */
+.ponencia-date-image {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+}
+
+.timeline-right .ponencia-date-image {
+  align-items: flex-end;
+}
+
+.ponencia-date {
+  background-color: #3366cc;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+}
+
+.ponencia-image-container {
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.ponencia-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.ponencia-image:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+/* Footer section */
+.ponencias-footer {
+  text-align: center;
+  margin-top: 4rem;
+}
+
+.ponencias-button {
+  display: inline-block;
+  padding: 0.8rem 1.8rem;
+  background-color: #3366cc;
+  color: white;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  transition: background-color 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.ponencias-button:hover {
+  background-color: #254e9c;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .ponencia-timeline::before {
+    left: 20px;
+  }
+  
+  .timeline-dot {
+    left: 20px;
+    transform: none;
+  }
+  
+  .ponencia-item {
+    flex-direction: column;
+  }
+  
+  .timeline-left, .timeline-right {
+    width: 100%;
+    margin-left: 40px;
+  }
+  
+  .timeline-left {
+    order: 1;
+  }
+  
+  .timeline-right {
+    order: 2;
+    margin-top: 1.5rem;
+  }
+  
+  .ponencia-date-image {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+  }
+  
+  .ponencia-date {
+    margin-bottom: 0;
+  }
+  
+  .ponencia-image-container {
+    width: 60%;
+    height: 120px;
+  }
+  
+  .timeline-right .ponencia-date-image {
+    align-items: center;
+    justify-content: flex-start;
+  }
+}

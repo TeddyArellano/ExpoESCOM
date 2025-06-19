@@ -1,0 +1,121 @@
+.informacion-section {
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.informacion-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  display: inline-block;
+}
+
+.informacion-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background-color: #3366cc;
+  border-radius: 2px;
+}
+
+.informacion-content {
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+.informacion-paragraph {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #ffffff;
+  margin-bottom: 1.2rem;
+}
+
+.informacion-highlight {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 1rem 0;
+  line-height: 1.6;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.informacion-card {
+  background-color: rgba(26, 59, 92, 0.8);
+  border-radius: 8px;
+  padding: 2rem;
+  margin: 2rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-left: 4px solid #3366cc;
+}
+
+.informacion-card h3 {
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+}
+
+.informacion-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin: 2.5rem 0;
+}
+
+.informacion-grid-item {
+  background-color: rgba(26, 59, 92, 0.7);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.informacion-grid-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: rgba(26, 59, 92, 0.9);
+}
+
+.informacion-grid-item h3 {
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.informacion-button {
+  display: inline-block;
+  padding: 0.8rem 1.8rem;
+  background-color: #3366cc;
+  color: white;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  transition: background-color 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.informacion-button:hover {
+  background-color: #254e9c;
+}
+
+@media (max-width: 768px) {
+  .informacion-title {
+    font-size: 2rem;
+  }
+  
+  .informacion-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
