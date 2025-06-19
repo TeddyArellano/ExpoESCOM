@@ -134,7 +134,7 @@ export default function Asistencia() {
                   borderRadius: '5px',
                 }}
               >
-                Exportar CSV
+                Exportar
               </button>
             </>
           ) : (
