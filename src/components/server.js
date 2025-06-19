@@ -14,31 +14,71 @@ const db = mysql.createConnection({
 });
 
 app.post('/api/registro', (req, res) => {
-  const { tipo_usuario, carrera, boleta, numero_empleado, nombre, correo, proyecto } = req.body;
+  const {
+    tipoUsuario,
+    carrera,
+    boleta,
+    numeroEmpleado,
+    nombre,
+    correo,
+    nombreProyecto,
+    materia,
+    docente,
+    horario,
+    nombresIntegrantes
+  } = req.body;
+
   if (
-    !tipo_usuario ||
+    !tipoUsuario ||
     !nombre ||
     !correo ||
-    !proyecto ||
-    (tipo_usuario === 'alumno' && (!boleta || !carrera)) ||
-    (tipo_usuario === 'maestro' && !numero_empleado)
+    !nombreProyecto ||
+    !materia ||
+    !docente ||
+    !horario ||
+    !nombresIntegrantes
   ) {
     return res.status(400).json({ mensaje: 'Faltan campos requeridos' });
   }
+
   db.query(
-    'INSERT INTO registros (tipo_usuario, carrera, boleta, numero_empleado, nombre, correo, proyecto) VALUES (?, ?, ?, ?, ?, ?, ?)',
+    `INSERT INTO proyectos 
+      (tipo_usuario, carrera, boleta, numero_empleado, nombre, correo, nombre_proyecto, materia, docente, horario, num_integrantes, nombres_integrantes)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
-      tipo_usuario,
-      tipo_usuario === 'alumno' ? carrera : null,
-      tipo_usuario === 'alumno' ? boleta : null,
-      tipo_usuario === 'maestro' ? numero_empleado : null,
+      tipoUsuario,
+      carrera || null,
+      boleta || null,
+      numeroEmpleado || null,
       nombre,
       correo,
-      proyecto
+      nombreProyecto,
+      materia,
+      docente,
+      horario,
+      nombresIntegrantes.length,
+      JSON.stringify(nombresIntegrantes)
     ],
     (err, result) => {
       if (err) return res.status(500).json({ mensaje: 'Error en la base de datos' });
       res.json({ mensaje: '¡Registro guardado correctamente!' });
+    }
+  );
+});
+
+// Nuevo endpoint para buscar proyecto por correo y boleta
+app.get('/api/proyecto', (req, res) => {
+  const { correo, boleta } = req.query;
+  if (!correo || !boleta) {
+    return res.status(400).json({ mensaje: 'Faltan datos de búsqueda' });
+  }
+  db.query(
+    'SELECT * FROM proyectos WHERE correo = ? AND boleta = ?',
+    [correo, boleta],
+    (err, results) => {
+      if (err) return res.status(500).json({ mensaje: 'Error en la base de datos' });
+      if (results.length === 0) return res.status(404).json({ mensaje: 'Proyecto no encontrado' });
+      res.json(results[0]);
     }
   );
 });

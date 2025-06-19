@@ -1,36 +1,46 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 
-export default function Registro() {
+export default function RegistroAlumnos() {
+  const [mostrarFormulario, setMostrarFormulario] = useState(false);
+
+  // Datos de usuario
   const [tipoUsuario, setTipoUsuario] = useState('');
+  const [carrera, setCarrera] = useState('');
   const [boleta, setBoleta] = useState('');
   const [numeroEmpleado, setNumeroEmpleado] = useState('');
-  const [carrera, setCarrera] = useState('');
   const [nombre, setNombre] = useState('');
   const [correo, setCorreo] = useState('');
-  const [proyecto, setProyecto] = useState('');
-  const [formVisible, setFormVisible] = useState(false);
-  const [hover, setHover] = useState(false);
 
-  const formRef = useRef(null);
-  const [maxHeight, setMaxHeight] = useState('0px');
-  const [opacity, setOpacity] = useState(0);
-  const [transform, setTransform] = useState('translateY(-10px)');
+  // Datos de proyecto
+  const [nombreProyecto, setNombreProyecto] = useState('');
+  const [materia, setMateria] = useState('');
+  const [docente, setDocente] = useState('');
+  const [correoInstitucional, setCorreoInstitucional] = useState('');
+  const [horario, setHorario] = useState('');
+  const [numIntegrantes, setNumIntegrantes] = useState(1);
+  const [nombresIntegrantes, setNombresIntegrantes] = useState(['']);
 
-  useEffect(() => {
-    if (formVisible && formRef.current) {
-      setMaxHeight(formRef.current.scrollHeight + 20 + 'px');
-      setOpacity(1);
-      setTransform('translateY(0)');
-    } else {
-      setMaxHeight('0px');
-      setOpacity(0);
-      setTransform('translateY(-10px)');
-    }
-  }, [formVisible, tipoUsuario]);
+  const handleNumIntegrantesChange = (e) => {
+    let cantidad = parseInt(e.target.value) || 1;
+    if (cantidad > 5) cantidad = 5;
+    if (cantidad < 1) cantidad = 1;
+    setNumIntegrantes(cantidad);
+    const nuevos = Array.from({ length: cantidad }, (_, i) => nombresIntegrantes[i] || '');
+    setNombresIntegrantes(nuevos);
+  };
+
+  const handleNombreIntegranteChange = (index, value) => {
+    const nuevos = [...nombresIntegrantes];
+    nuevos[index] = value;
+    setNombresIntegrantes(nuevos);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!tipoUsuario) return alert('Selecciona tipo de usuario');
+    if (!nombre.trim()) return alert('Ingresa tu nombre completo');
+    if (!correo.match(/.+@.+\.ipn\.mx$/)) return alert('Correo institucional debe terminar en .ipn.mx');
+
     if (tipoUsuario === 'alumno') {
       if (!carrera) return alert('Selecciona la carrera');
       if (!/^\d{10}$/.test(boleta)) return alert('La boleta debe tener 10 dígitos');
@@ -38,9 +48,12 @@ export default function Registro() {
     if (tipoUsuario === 'maestro') {
       if (!/^\d{8,10}$/.test(numeroEmpleado)) return alert('El número de empleado debe tener entre 8 y 10 dígitos');
     }
-    if (!nombre.trim()) return alert('Ingresa tu nombre completo');
-    if (!correo.match(/.+@.+\.ipn\.mx$/)) return alert('Correo institucional debe terminar en .ipn.mx');
-    if (!proyecto.trim()) return alert('Ingresa nombre del proyecto');
+    if (!nombreProyecto.trim()) return alert('Ingresa el nombre del proyecto');
+    if (!materia.trim()) return alert('Ingresa la materia');
+    if (!docente.trim()) return alert('Ingresa el nombre del docente');
+    if (!correoInstitucional.match(/.+@.+\.ipn\.mx$/)) return alert('El correo del proyecto debe terminar en .ipn.mx');
+    if (!horario) return alert('Selecciona un horario');
+    if (nombresIntegrantes.some(n => !n.trim())) return alert('Todos los nombres de los integrantes son obligatorios');
 
     // Enviar datos al backend
     try {
@@ -48,12 +61,19 @@ export default function Registro() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          tipo_usuario: tipoUsuario,
+          tipoUsuario,
           carrera,
           boleta,
+          numeroEmpleado,
           nombre,
           correo,
-          proyecto
+          nombreProyecto,
+          materia,
+          docente,
+          correoInstitucional,
+          horario,
+          numIntegrantes,
+          nombresIntegrantes
         }),
       });
       const data = await res.json();
@@ -68,251 +88,224 @@ export default function Registro() {
     }
   };
 
-  const ArrowIcon = ({ open, bounce }) => (
-    <svg
-      style={{
-        transition: 'transform 0.3s ease',
-        transform: open ? 'rotate(90deg)' : 'rotate(0deg)',
-        width: '1.4em',
-        height: '1.4em',
-        fill: 'white',
-        display: 'inline-block',
-        verticalAlign: 'middle',
-        marginLeft: '8px',
-        animation: bounce ? 'bounce 0.6s ease infinite' : 'none',
-      }}
-      viewBox="0 0 20 20"
-    >
-      <path d="M7 5l5 5-5 5V5z" />
-      <style>
-        {`
-          @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-          }
-        `}
-      </style>
-    </svg>
-  );
-
   return (
-    <section id="registro" className="section">
-      <div style={styles.container}>
-        <h3
-          style={styles.title}
-          onClick={() => setFormVisible(!formVisible)}
-          aria-expanded={formVisible}
-          aria-controls="form-registro"
-          onMouseEnter={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
-          title="Haz clic para desplegar/ocultar el formulario"
-        >
-          <span style={styles.titleText}>
-            Formulario de Registro
-            <ArrowIcon open={formVisible} bounce={hover && !formVisible} />
-          </span>
-        </h3>
+    <section id="registro" className="section" style={{ padding: '2rem' }}>
+      <h2 style={{ color: 'white' }}>Registro de Proyecto</h2>
+      <p style={{ color: 'white' }}>Llena este formulario para registrar tu proyecto</p>
+      <br />
 
-        <div
-          ref={formRef}
+      <button
+        onClick={() => setMostrarFormulario(!mostrarFormulario)}
+        style={{
+          padding: '0.7rem 1.5rem',
+          marginBottom: '1rem',
+          cursor: 'pointer',
+          backgroundColor: '#3366cc55',
+          color: 'white',
+          border: 'none',
+          borderRadius: '5px',
+        }}
+      >
+        {mostrarFormulario ? 'Ocultar formulario' : 'Mostrar formulario'}
+      </button>
+
+      {mostrarFormulario && (
+        <form
+          onSubmit={handleSubmit}
           style={{
-            ...styles.formWrapper,
-            maxHeight: maxHeight,
-            opacity: opacity,
-            transform: transform,
+            backgroundColor: '#3366cc55',
+            borderRadius: '10px',
+            padding: '1.5rem',
           }}
-          id="form-registro"
         >
-          <form onSubmit={handleSubmit} style={styles.form}>
-            {/* El resto del formulario igual */}
-            <label style={styles.label}>
-              Tipo de usuario
-              <select
-                value={tipoUsuario}
-                onChange={(e) => {
-                  setTipoUsuario(e.target.value);
-                  if (e.target.value === 'alumno') {
-                    setNumeroEmpleado('');
-                  } else {
-                    setBoleta('');
-                    setCarrera('');
-                  }
-                }}
-                required
-                style={styles.select}
-              >
-                <option value="">Selecciona...</option>
-                <option value="maestro">Maestro</option>
-                <option value="alumno">Alumno</option>
-              </select>
-            </label>
+          {/* Tipo de usuario */}
+          <div style={{ marginBottom: '1rem' }}>
+            <label style={{ color: 'white' }}>Tipo de usuario:</label><br />
+            <select
+              value={tipoUsuario}
+              onChange={e => setTipoUsuario(e.target.value)}
+              required
+              style={inputStyle}
+            >
+              <option value="">Selecciona</option>
+              <option value="alumno">Alumno</option>
+              <option value="maestro">Maestro</option>
+            </select>
+          </div>
 
-            {tipoUsuario === 'alumno' && (
-              <>
-                <label style={styles.label}>
-                  Carrera
-                  <select
-                    value={carrera}
-                    onChange={(e) => setCarrera(e.target.value)}
-                    required
-                    style={styles.select}
-                  >
-                    <option value="">Selecciona carrera</option>
-                    <option value="ISC">ISC</option>
-                    <option value="LCD">LCD</option>
-                    <option value="IA">IA</option>
-                  </select>
-                </label>
-
-                <label style={styles.label}>
-                  Número de boleta
-                  <input
-                    type="text"
-                    value={boleta}
-                    onChange={(e) => setBoleta(e.target.value)}
-                    placeholder="Ejemplo: 0123456789"
-                    pattern="\d{10}"
-                    title="Ingresa 10 dígitos"
-                    required
-                    style={styles.input}
-                  />
-                </label>
-              </>
-            )}
-
-            {tipoUsuario === 'maestro' && (
-              <label style={styles.label}>
-                Número de empleado
+          {/* Campos específicos según tipo de usuario */}
+          {tipoUsuario === 'alumno' && (
+            <>
+              <div style={{ marginBottom: '1rem' }}>
+                <label style={{ color: 'white' }}>Carrera:</label><br />
                 <input
                   type="text"
-                  value={numeroEmpleado}
-                  onChange={(e) => setNumeroEmpleado(e.target.value)}
-                  placeholder="Ejemplo: 12345678"
-                  pattern="\d{8,10}"
-                  title="Entre 8 y 10 dígitos"
+                  value={carrera}
+                  onChange={e => setCarrera(e.target.value)}
                   required
-                  style={styles.input}
+                  placeholder="Ej. ISC"
+                  style={inputStyle}
                 />
-              </label>
-            )}
+              </div>
+              <div style={{ marginBottom: '1rem' }}>
+                <label style={{ color: 'white' }}>Boleta:</label><br />
+                <input
+                  type="text"
+                  value={boleta}
+                  onChange={e => setBoleta(e.target.value)}
+                  required
+                  placeholder="Ej. 2020123456"
+                  style={inputStyle}
+                />
+              </div>
+            </>
+          )}
+          {tipoUsuario === 'maestro' && (
+            <div style={{ marginBottom: '1rem' }}>
+              <label style={{ color: 'white' }}>Número de empleado:</label><br />
+              <input
+                type="text"
+                value={numeroEmpleado}
+                onChange={e => setNumeroEmpleado(e.target.value)}
+                required
+                placeholder="Ej. 12345678"
+                style={inputStyle}
+              />
+            </div>
+          )}
 
-            <label style={styles.label}>
-              Nombre completo
+          {/* Nombre y correo */}
+          <div style={{ marginBottom: '1rem' }}>
+            <label style={{ color: 'white' }}>Nombre completo:</label><br />
+            <input
+              type="text"
+              value={nombre}
+              onChange={e => setNombre(e.target.value)}
+              required
+              placeholder="Ej. Juan Pérez"
+              style={inputStyle}
+            />
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <label style={{ color: 'white' }}>Correo institucional:</label><br />
+            <input
+              type="email"
+              value={correo}
+              onChange={e => setCorreo(e.target.value)}
+              required
+              placeholder="Ej. usuario@alumno.ipn.mx"
+              style={inputStyle}
+            />
+          </div>
+
+          {/* Datos del proyecto */}
+          <div style={{ marginBottom: '1rem' }}>
+            <label style={{ color: 'white' }}>Nombre del proyecto:</label><br />
+            <input
+              type="text"
+              value={nombreProyecto}
+              onChange={(e) => setNombreProyecto(e.target.value)}
+              required
+              placeholder="Ej. Sistema de Riego Inteligente"
+              style={inputStyle}
+            />
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <label style={{ color: 'white' }}>Materia:</label><br />
+            <input
+              type="text"
+              value={materia}
+              onChange={(e) => setMateria(e.target.value)}
+              required
+              placeholder="Ej. Desarrollo Web"
+              style={inputStyle}
+            />
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <label style={{ color: 'white' }}>Nombre del docente:</label><br />
+            <input
+              type="text"
+              value={docente}
+              onChange={(e) => setDocente(e.target.value)}
+              required
+              placeholder="Ej. Dra. González"
+              style={inputStyle}
+            />
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <label style={{ color: 'white' }}>Correo institucional del proyecto:</label><br />
+            <input
+              type="email"
+              value={correoInstitucional}
+              onChange={(e) => setCorreoInstitucional(e.target.value)}
+              required
+              placeholder="Ej. proyecto@alumno.ipn.mx"
+              style={inputStyle}
+            />
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <label style={{ color: 'white' }}>Horario:</label><br />
+            <select
+              value={horario}
+              onChange={(e) => setHorario(e.target.value)}
+              required
+              style={inputStyle}
+            >
+              <option value="">Selecciona un horario</option>
+              <option value="10:30 - 13:30">10:30 - 13:30</option>
+              <option value="15:00 - 18:00">15:00 - 18:00</option>
+            </select>
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <label style={{ color: 'white' }}>Número de integrantes (máximo 5):</label><br />
+            <input
+              type="number"
+              min="1"
+              max="5"
+              value={numIntegrantes}
+              onChange={handleNumIntegrantesChange}
+              required
+              style={inputStyle}
+            />
+          </div>
+          {nombresIntegrantes.map((nombre, i) => (
+            <div key={i} style={{ marginBottom: '1rem' }}>
+              <label style={{ color: 'white' }}>Nombre del integrante #{i + 1}:</label><br />
               <input
                 type="text"
                 value={nombre}
-                onChange={(e) => setNombre(e.target.value)}
-                placeholder="Tu nombre completo"
+                onChange={(e) => handleNombreIntegranteChange(i, e.target.value)}
                 required
-                style={styles.input}
+                placeholder={`Ej. Integrante ${i + 1}`}
+                style={inputStyle}
               />
-            </label>
+            </div>
+          ))}
 
-            <label style={styles.label}>
-              Correo institucional
-              <input
-                type="email"
-                value={correo}
-                onChange={(e) => setCorreo(e.target.value)}
-                placeholder="@alumno/maestro.ipn.mx"
-                pattern=".+@.+\.ipn\.mx"
-                title="Correo institucional válido"
-                required
-                style={styles.input}
-              />
-            </label>
-
-            <label style={styles.label}>
-              Nombre del proyecto
-              <input
-                type="text"
-                value={proyecto}
-                onChange={(e) => setProyecto(e.target.value)}
-                placeholder="Nombre del proyecto"
-                required
-                style={styles.input}
-              />
-            </label>
-
-            <button type="submit" style={styles.button}>Registrar</button>
-          </form>
-        </div>
-      </div>
+          <button
+            type="submit"
+            style={{
+              padding: '0.7rem 1.5rem',
+              backgroundColor: '#3366cc',
+              color: 'white',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              marginTop: '1rem',
+            }}
+          >
+            Registrar proyecto
+          </button>
+        </form>
+      )}
     </section>
   );
 }
 
-const styles = {
-  container: {
-    maxWidth: '480px',
-    margin: '2rem auto',
-    padding: '0.5rem 0.5rem',
-    backgroundColor: '#002f66cc',
-    borderRadius: '12px',
-    boxShadow: '0 0 22px rgba(0,0,0,0.15)',
-    backdropFilter: 'blur(6px)',
-    border: '1px solid #3366cc55',
-    color: 'white',
-  },
-  title: {
-    textAlign: 'center',
-    marginBottom: '1rem',
-    fontSize: '1.8rem',
-    color: 'white',
-    fontFamily: 'Segoe UI, sans-serif',
-    cursor: 'pointer',
-    userSelect: 'none',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  titleText: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  formWrapper: {
-    overflow: 'hidden',
-    transition: 'max-height 0.5s ease, opacity 0.5s ease, transform 0.5s ease',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  label: {
-    marginBottom: '1rem',
-    color: 'black',
-    fontWeight: 'bold',
-    fontSize: '1rem',
-  },
-  input: {
-    padding: '10px',
-    border: '2px solid #3366cc',
-    borderRadius: '6px',
-    fontSize: '1rem',
-    width: '100%',
-    color: 'black',
-    backgroundColor: 'white',
-  },
-  select: {
-    padding: '10px',
-    border: '2px solid #3366cc',
-    borderRadius: '6px',
-    fontSize: '1rem',
-    width: '100%',
-    backgroundColor: 'white',
-    color: 'black',
-  },
-  button: {
-    marginTop: '1rem',
-    padding: '12px',
-    fontSize: '1.1rem',
-    backgroundColor: '#003366',
-    color: 'white',
-    fontWeight: 'bold',
-    border: 'none',
-    borderRadius: '6px',
-    cursor: 'pointer',
-    transition: 'background-color 0.3s ease',
-  },
+const inputStyle = {
+  width: '100%',
+  padding: '0.5rem',
+  borderRadius: '5px',
+  border: '1px solid #ccc',
+  marginTop: '0.3rem',
 };
